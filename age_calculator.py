@@ -13,6 +13,7 @@ def calculate_age(name, birthdate):
 
     return f"Congratulations {name} on surviving {years} years, {months} months, {days} days, {hours} hours, and {minutes} minutes."
 
-name = input("Enter your name: ")
-birthdate = input("Enter your birthdate (YYYY-MM-DD): ")
+name = "harsh"
+birthdate = 2001-04-30
 print(calculate_age(name, birthdate))
+
