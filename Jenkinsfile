@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git branch: 'master', url: 'https://github.com/harshprajapati304/age-calculator'
+                git branch: 'main', url: 'https://github.com/harshprajapati304/age-calculator'
             }
         }
 
