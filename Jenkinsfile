@@ -19,7 +19,7 @@ pipeline {
                 // sh './dependency-check/bin/dependency-check.sh --scan ./ --format HTML --out report.html'
                 // archiveArtifacts 'report.html'
             // }
-        }
+        //}
 
         stage('Deploy to Target VM') {
             steps {
