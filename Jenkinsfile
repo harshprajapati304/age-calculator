@@ -4,26 +4,34 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git branch: 'main', url: 'https://github.com/harshprajapati304/age-calculator'
+                git 'https://your-git-repo-url.git'
             }
         }
 
-        stage('Build') {
+        stage('Lint IaC Code') {
             steps {
-                sh 'python3 age_calculator.py'
+                sh 'terraform validate'
+                sh 'vagrant validate'
+                sh 'ansible-lint'
             }
         }
 
-        // stage('Security Scan') {
-            // steps {
-                // sh './dependency-check/bin/dependency-check.sh --scan ./ --format HTML --out report.html'
-                // archiveArtifacts 'report.html'
-            // }
-        //}
-
-        stage('Deploy to Target VM') {
+        stage('Provision Infrastructure') {
             steps {
-                sh 'scp -o StrictHostKeyChecking=no age_calculator.py test@10.0.2.15:~/'            }
+                sh 'vagrant up --provision'
+            }
+        }
+
+        stage('Run Security Scan') {
+            steps {
+                sh 'lynis audit system'
+            }
+        }
+
+        stage('Deploy Application') {
+            steps {
+                sh 'ansible-playbook -i inventory.ini deploy.yml'
+            }
         }
     }
 }
